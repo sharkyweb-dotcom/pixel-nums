@@ -66,12 +66,16 @@ function createBoard(width,height,squareDimensions,colors,border,eventHandlers,t
         tile.classList.add('tile');
         tile.classList.add(`column${column}`)
         tile.classList.add(`row${row}`)
+        tile.row=`${row}`
+        tile.column=`${column}`
         tile.id=`tile${i}`;
         tile.style.backgroundColor=colorSwitch(colors,i,endRowList,width);
         if (tile.style.backgroundColor===colors[1]) {
             tile.classList.add("color1")
+            tile.oriColor=colors[1]
         } else {
             tile.classList.add("color2")
+            tile.oriColor=colors[2]
         }
         //tile.style.boxShadow=`inset 0 0 ${border[1]}px ${border[0]}, inset 0 0 ${border[1]}px ${border[0]}, inset 0 0 ${border[1]}px ${border[0]}`
         board.appendChild(tile)
