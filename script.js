@@ -33,7 +33,9 @@ function darken(tile,color) {
         }
         tile.style.backgroundColor=color;
         tile.style.opacity='1';
-        listOfSelected.push([tile.row,tile.column]);
+            if (tile.row<=27 && tile.column <= 27) {
+                listOfSelected.push([tile.row,tile.column]);
+            }
     } else if (mouseDown && eraser) {
         tile.style.backgroundColor=tile.oriColor;
         tile.style.opacity='0.1';
