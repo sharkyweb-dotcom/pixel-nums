@@ -17,7 +17,7 @@ function createOnnxTensor(points) {
     }
     
     // Create a new ONNX tensor with the data and shape
-    const tensor = new onnx.Tensor(data, 'float32', shape);
+    const tensor = new onnx.Tensor(new Float32Array(data), 'float32');
     
     return tensor;
 }
