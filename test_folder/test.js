@@ -50,7 +50,8 @@ async function updatePredictions() {
   // Get the predictions for the canvas data.
   const imgData = ctx.getImageData(0, 0, CANVAS_SIZE, CANVAS_SIZE);
   const input = new onnx.Tensor(new Float32Array(imgData.data), "float32");
-
+  print(imgData.data)
+  print(new Float32Array(imgData.data), "float32")
   const outputMap = await sess.run([input]);
   const outputTensor = outputMap.values().next().value;
   const predictions = outputTensor.data;
