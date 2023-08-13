@@ -1,6 +1,5 @@
-alert("5/28/2023 NEW VERSION 1")
 // Define Tensor
-function createOnnxTensor(points) {
+/*function createOnnxTensor(points) {
     // Calculate the number of dimensions for the tensor
     const numDimensions = points[0].length;
     
@@ -21,24 +20,24 @@ function createOnnxTensor(points) {
     const tensor = new onnx.Tensor(new Float32Array(data), 'float32');
     
     return tensor;
-}
+}*/
 // ONNX
 const sess = new onnx.InferenceSession();
 const loadingModelPromise = sess.loadModel("./models/onnx_model.onnx");
-async function updatePredictions() {
+async function updatePredictions(imgData) {
   // Get the predictions for the canvas data.
-  let input=createOnnxTensor(listOfSelected)
+  const input = new onnx.Tensor(new Float32Array(imgData), 'float32');
   const outputMap = await sess.run([input]);
   const outputTensor = outputMap.values().next().value;
   const predictions = outputTensor.data;
   const maxPrediction = Math.max(...predictions);
-
-  for (let i = 0; i < predictions.length; i++) {
+  console.log(maxPrediction)
+  /*for (let i = 0; i < predictions.length; i++) {
     const element = document.getElementById(`prediction-${i}`);
     element.children[0].children[0].style.height = `${predictions[i] * 100}%`;
     element.className =
       predictions[i] === maxPrediction
         ? "prediction-col top-prediction"
         : "prediction-col";
-  }
+  }*/
 }

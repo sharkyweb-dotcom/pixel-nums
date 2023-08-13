@@ -3,6 +3,9 @@ let mouseDown=false;
 let eraser=false;
 let paragraph
 let colorBox=document.getElementById('col')
+let valueList=[];
+for (let i=0;i<3136;i++) {valueList.push(0)}
+document.getElementById("guess").addEventListener('click',updatePredictions(valueList))
 function viewMatrix() {
     listAsString=''
     listOfSelected.forEach((val)=>{
@@ -24,7 +27,7 @@ function eraseChange() {
     eraser=!eraser;
 }
 function darken(tile,color) {
-    if (mouseDown && !eraser) {
+    if (mouseDown && !eraser) { 
         if (color==undefined) {
             color=colorBox.value;
             if (color=='') {
@@ -35,6 +38,14 @@ function darken(tile,color) {
         tile.style.opacity='1';
             if (tile.row<=27 && tile.column <= 27) {
                 listOfSelected.push([tile.row,tile.column]);
+                num=parseInt(tile.id.split("tile")[1])*4
+                for (let i=num;i<4+num;i++) {
+                    if (i == num+3) {
+                        valueList[i]=255
+                    } else {
+                        valueList[i]=33
+                    }
+                }
             }
     } else if (mouseDown && eraser) {
         tile.style.backgroundColor=tile.oriColor;
@@ -64,7 +75,7 @@ function recreate() {
     })
 }
 createBoard(
-    280,280,1,
+    28,28,13,
     ["","white","dimgrey" ],[/*border "black",5,"dashed"*/],
     [['mouseover',darken],['click',darken]],
     [],[]
