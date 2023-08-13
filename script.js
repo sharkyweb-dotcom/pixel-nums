@@ -6,7 +6,7 @@ let colorBox=document.getElementById('col')
 let valueList=[];
 let noColorList=[]
 for (let i=0;i<3136;i++) {valueList.push(0)}
-for (let i=0;i<784;i++) {noColorListList.push(0)}
+for (let i=0;i<784;i++) {noColorList.push(0)}
 document.getElementById("guess").addEventListener('click',updatePredictions(noColorList))
 function viewMatrix() {
     listAsString=''
