@@ -4,7 +4,9 @@ let eraser=false;
 let paragraph
 let colorBox=document.getElementById('col')
 let valueList=[];
+let noColorList=[]
 for (let i=0;i<3136;i++) {valueList.push(0)}
+for (let i=0;i<784;i++) {valueList.push(0)}
 document.getElementById("guess").addEventListener('click',updatePredictions(valueList))
 function viewMatrix() {
     listAsString=''
@@ -46,6 +48,7 @@ function darken(tile,color) {
                         valueList[i]=33
                     }
                 }
+                noColorList[num/4]=255;
             }
     } else if (mouseDown && eraser) {
         tile.style.backgroundColor=tile.oriColor;
@@ -62,12 +65,14 @@ function save() {
         }
         colorList.push(color)
     })
-    let cookieToSave=colorList.join()
+    let cookieToSave=colorList.join("::")
     console.log(cookieToSave)
     document.cookie=cookieToSave;
+    console.log(document.cookie)
 }
 function recreate() {
-    let colorList=document.cookie.split(',')
+    consolelog(document.cookie)
+    let colorList=document.cookie.split('::')
     let index=0
     Object.values(document.getElementById('board').children).forEach((child)=>{
         darken(child,colorList[index])
