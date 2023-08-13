@@ -64,7 +64,7 @@ function recreate() {
     })
 }
 createBoard(
-    28,28,13,
+    280,280,1,
     ["","white","dimgrey" ],[/*border "black",5,"dashed"*/],
     [['mouseover',darken],['click',darken]],
     [],[]
