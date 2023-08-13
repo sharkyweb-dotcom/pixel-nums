@@ -30,7 +30,8 @@ model.eval()
 dummy_input = torch.zeros(1,1,28,28)
 
 print("now try to export")
-torch.onnx.export(model,dummy_input,'onnx_model_inference.onnx',verbose=True)
+torch.onnx.export(model,dummy_input,'onnx_model_inference.onnx',verbose=True, opset_version=12)
+# torch.onnx.export(model, dummy_input, "model.onnx", opset_version=11)
 print("successfully converted!!")
 #Function to Convert to ONNX 
 # def Convert_ONNX(): 
