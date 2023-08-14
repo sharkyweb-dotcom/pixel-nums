@@ -22,11 +22,12 @@ train_loader = DataLoader(train_dataset, batch_size=64, shuffle=True)
 test_loader = DataLoader(test_dataset, batch_size=64, shuffle=False)
 
 # Test by printing the shape of the first batch
-# data_iter = iter(train_loader)
-# images, labels = data_iter.next()
-# print(images.shape)
-# print(labels.shape)
+data_iter = iter(train_loader)
+images, labels = data_iter.next()
+print(images.shape)
+print(labels.shape)
 
+out_dim = 62
 
 # Define the CNN model
 class CNN(nn.Module):
@@ -35,7 +36,7 @@ class CNN(nn.Module):
         self.conv1 = nn.Conv2d(1, 32, kernel_size=3, stride=1, padding=1)
         self.conv2 = nn.Conv2d(32, 64, kernel_size=3, stride=1, padding=1)
         self.fc1 = nn.Linear(64*28*28, 128)
-        self.fc2 = nn.Linear(128, 10)
+        self.fc2 = nn.Linear(128, out_dim)
 
     def forward(self, x):
         x = torch.relu(self.conv1(x))
@@ -52,7 +53,7 @@ optimizer = optim.Adam(model.parameters(), lr=0.001)
 # Training the model
 num_epochs = 5
 
-z_ = 0
+# z_ = 0
 
 for epoch in range(num_epochs):
     model.train()
@@ -62,16 +63,16 @@ for epoch in range(num_epochs):
     for inputs, labels in train_loader:
         
         if z_ == 0:
-            print("Label:", labels[0])
-            print(inputs[0])
+            # print("Label:", labels[0])
+            # print(inputs[0])
 
-            image = inputs[0].squeeze().numpy() * 0.5 + 0.5
-            plt.imshow(image, cmap="gray")
-            plt.title(f"Label: {labels[0].item()}")
-            plt.imsave('sample_image_alpha.png', image, cmap="gray")
-            plt.show()
+            # image = inputs[0].squeeze().numpy() * 0.5 + 0.5
+            # plt.imshow(image, cmap="gray")
+            # plt.title(f"Label: {labels[0].item()}")
+            # plt.imsave('sample_image_alpha.png', image, cmap="gray")
+            # plt.show()
 
-            z = 1
+            # z = 1
 
         optimizer.zero_grad()
         outputs = model(inputs)
