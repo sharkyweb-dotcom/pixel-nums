@@ -26,7 +26,7 @@ const sess = new onnx.InferenceSession();
 const loadingModelPromise = sess.loadModel("./models/onnx_model.onnx");
 async function updatePredictions(imgData) {
   // Get the predictions for the canvas data.
-  const input = new onnx.Tensor(new Float32Array(imgData), 'float32');
+  const input = new onnx.Tensor(new Float32Array(imgData), 'float32',[1,1,28,28]);
   const outputMap = await sess.run([input]);
   const outputTensor = outputMap.values().next().value;
   const predictions = outputTensor.data;
