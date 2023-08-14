@@ -1,6 +1,6 @@
 #!/bin/bash -l
 
-#SBATCH --job-name=dpo_step
+#SBATCH --job-name=pix
 #SBATCH --partition=gpu
 #SBATCH --mem=256GB
 #SBATCH --cpus-per-task=24
@@ -12,8 +12,8 @@
 # get conda
 module load anaconda/3-2021.05
 
-echo "try to create environment"
-conda env create -f env.yml
+# echo "try to create environment"
+# conda env create -f env.yml
 
 echo "try to activate environment"
 conda activate cnn-env

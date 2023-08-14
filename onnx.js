@@ -27,7 +27,7 @@ const sess = new onnx.InferenceSession();
 const loadingModelPromise = sess.loadModel("./models/onnx_model.onnx");
 async function updatePredictions(imgData) {
   // Get the predictions for the canvas data.
-  // const input = new onnx.Tensor(imgData, 'float32',[1,1,28,28]);
+  const input = new onnx.Tensor(imgData, 'float32',[1,1,28,28]);
 
   // const flatData = new Float32Array(1 * 1 * 28 * 28).fill(0);
   // const input = new onnx.Tensor(flatData, 'float32', [1, 1, 28, 28]);
@@ -37,7 +37,7 @@ async function updatePredictions(imgData) {
   const predictions = outputTensor.data;
   const maxPrediction = Math.max(...predictions);
   console.log(maxPrediction)
-  alert(predictions.indexOf(maxPrediction))
+  document.getElementById("heading").innerHTML=predictions.indexOf(maxPrediction)
   /*for (let i = 0; i < predictions.length; i++) {
     const element = document.getElementById(`prediction-${i}`);
     element.children[0].children[0].style.height = `${predictions[i] * 100}%`;
