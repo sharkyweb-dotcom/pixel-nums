@@ -4,6 +4,8 @@ import torch
 from torchvision import datasets, transforms
 from torch.utils.data import DataLoader
 
+import torch.nn.functional as F	
+
 import torch.nn as nn
 import torch.optim as optim
 
@@ -46,7 +48,48 @@ class CNN(nn.Module):
         x = self.fc2(x)
         return x
 
-model = CNN()
+class EMNIST_Classifier(nn.Module):
+    def __init__(self):
+        super(EMNIST_Classifier, self).__init__()
+        
+        # Define the convolutional layers
+        self.conv1 = nn.Conv2d(in_channels=1, out_channels=32, kernel_size=3, stride=1, padding=1)
+        self.conv2 = nn.Conv2d(in_channels=32, out_channels=64, kernel_size=3, stride=1, padding=1)
+        self.conv3 = nn.Conv2d(in_channels=64, out_channels=128, kernel_size=3, stride=1, padding=1)
+        
+        # Define the pooling layer (Average pooling)
+        self.pool = nn.AvgPool2d(kernel_size=2, stride=2)
+        
+        # Define the fully connected layers
+        self.fc1 = nn.Linear(128 * 7 * 7, 512) # Assuming the input image size is 28x28
+        self.fc2 = nn.Linear(512, 256)
+        self.fc3 = nn.Linear(256, 62) # 62 output classes
+        
+        # Define the dropout layer
+        self.dropout = nn.Dropout(0.5)
+        
+    def forward(self, x):
+        # Convolutional layers with ReLU activation and average pooling
+        x = self.pool(F.relu(self.conv1(x)))
+        x = self.pool(F.relu(self.conv2(x)))
+        x = self.pool(F.relu(self.conv3(x)))
+        
+        # Flatten the output
+        x = x.view(-1, 128 * 7 * 7)
+        
+        # Fully connected layers with ReLU activation and dropout
+        x = F.relu(self.fc1(x))
+        x = self.dropout(x)
+        
+        x = F.relu(self.fc2(x))
+        x = self.dropout(x)
+        
+        x = self.fc3(x) # No activation for the final layer as we'll probably use CrossEntropyLoss
+        
+        return x
+
+# model = CNN()
+model = EMNIST_Classifier()
 criterion = nn.CrossEntropyLoss()
 optimizer = optim.Adam(model.parameters(), lr=0.001)
 
@@ -56,6 +99,7 @@ num_epochs = 5
 # z_ = 0
 
 for epoch in range(num_epochs):
+    print(f"Now opertaing on epoch {epoch}")
     model.train()
     train_loss = 0.0
     correct_train = 0
@@ -100,4 +144,4 @@ for epoch in range(num_epochs):
     print(f"Testing Accuracy: {test_accuracy:.2f}%")
     print("-----------------------------")
 
-torch.save(model.state_dict(), 'emnist_cnn_weights.pth')
+torch.save(model.state_dict(), 'emnist_cnn_weights_v2.pth')
