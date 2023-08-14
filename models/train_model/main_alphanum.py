@@ -61,7 +61,7 @@ class EMNIST_Classifier(nn.Module):
         self.pool = nn.AvgPool2d(kernel_size=2, stride=2)
         
         # Define the fully connected layers
-        self.fc1 = nn.Linear(128 * 7 * 7, 512) # Assuming the input image size is 28x28
+        self.fc1 = nn.Linear(128 * 3 * 3, 512) 
         self.fc2 = nn.Linear(512, 256)
         self.fc3 = nn.Linear(256, 62) # 62 output classes
         
@@ -75,7 +75,7 @@ class EMNIST_Classifier(nn.Module):
         x = self.pool(F.relu(self.conv3(x)))
         
         # Flatten the output
-        x = x.view(-1, 128 * 7 * 7)
+        x = x.view(-1, 128 * 3 * 3)
         
         # Fully connected layers with ReLU activation and dropout
         x = F.relu(self.fc1(x))
@@ -84,7 +84,7 @@ class EMNIST_Classifier(nn.Module):
         x = F.relu(self.fc2(x))
         x = self.dropout(x)
         
-        x = self.fc3(x) # No activation for the final layer as we'll probably use CrossEntropyLoss
+        x = self.fc3(x) # No activation for the final layer
         
         return x
 
