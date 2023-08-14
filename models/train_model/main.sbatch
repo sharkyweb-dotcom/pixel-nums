@@ -1,6 +1,6 @@
 #!/bin/bash -l
 
-#SBATCH --job-name=dpo_step
+#SBATCH --job-name=pix
 #SBATCH --partition=gpu
 #SBATCH --mem=256GB
 #SBATCH --cpus-per-task=24

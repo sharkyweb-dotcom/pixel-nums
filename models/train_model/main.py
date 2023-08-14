@@ -58,7 +58,7 @@ for epoch in range(num_epochs):
             plt.imsave('sample_image.png', image, cmap="gray")
             plt.show()
 
-            z = 1
+            z_ = 1
 
         optimizer.zero_grad()
         outputs = model(inputs)
