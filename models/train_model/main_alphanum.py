@@ -62,7 +62,7 @@ for epoch in range(num_epochs):
 
     for inputs, labels in train_loader:
         
-        if z_ == 0:
+        # if z_ == 0:
             # print("Label:", labels[0])
             # print(inputs[0])
 
