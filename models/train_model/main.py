@@ -15,9 +15,9 @@ train_loader = DataLoader(train_dataset, batch_size=64, shuffle=True)
 test_loader = DataLoader(test_dataset, batch_size=64, shuffle=False)
 
 # Define the CNN model
-class SimpleCNN(nn.Module):
+class CNN(nn.Module):
     def __init__(self):
-        super(SimpleCNN, self).__init__()
+        super(CNN, self).__init__()
         self.conv1 = nn.Conv2d(1, 32, kernel_size=3, stride=1, padding=1)
         self.conv2 = nn.Conv2d(32, 64, kernel_size=3, stride=1, padding=1)
         self.fc1 = nn.Linear(64*28*28, 128)
@@ -31,7 +31,7 @@ class SimpleCNN(nn.Module):
         x = self.fc2(x)
         return x
 
-model = SimpleCNN()
+model = CNN()
 criterion = nn.CrossEntropyLoss()
 optimizer = optim.Adam(model.parameters(), lr=0.001)
 
