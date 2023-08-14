@@ -1,21 +1,26 @@
 try to activate environment
+Now opertaing on epoch 0
 Epoch 1/5
-Training Loss: 0.4857, Training Accuracy: 83.38%
-Testing Accuracy: 85.45%
+Training Loss: 0.6461, Training Accuracy: 79.12%
+Testing Accuracy: 85.47%
 -----------------------------
+Now opertaing on epoch 1
 Epoch 2/5
-Training Loss: 0.3751, Training Accuracy: 86.26%
-Testing Accuracy: 86.08%
+Training Loss: 0.4489, Training Accuracy: 84.36%
+Testing Accuracy: 86.15%
 -----------------------------
+Now opertaing on epoch 2
 Epoch 3/5
-Training Loss: 0.3319, Training Accuracy: 87.45%
-Testing Accuracy: 85.94%
+Training Loss: 0.4162, Training Accuracy: 85.25%
+Testing Accuracy: 86.74%
 -----------------------------
+Now opertaing on epoch 3
 Epoch 4/5
-Training Loss: 0.2947, Training Accuracy: 88.55%
-Testing Accuracy: 85.46%
+Training Loss: 0.4021, Training Accuracy: 85.68%
+Testing Accuracy: 86.80%
 -----------------------------
+Now opertaing on epoch 4
 Epoch 5/5
-Training Loss: 0.2615, Training Accuracy: 89.66%
-Testing Accuracy: 85.24%
+Training Loss: 0.3919, Training Accuracy: 85.95%
+Testing Accuracy: 86.63%
 -----------------------------
