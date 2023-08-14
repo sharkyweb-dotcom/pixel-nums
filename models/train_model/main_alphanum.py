@@ -22,10 +22,10 @@ train_loader = DataLoader(train_dataset, batch_size=64, shuffle=True)
 test_loader = DataLoader(test_dataset, batch_size=64, shuffle=False)
 
 # Test by printing the shape of the first batch
-data_iter = iter(train_loader)
-images, labels = data_iter.next()
-print(images.shape)
-print(labels.shape)
+# data_iter = iter(train_loader)
+# images, labels = data_iter.next()
+# print(images.shape)
+# print(labels.shape)
 
 out_dim = 62
 
