@@ -37,7 +37,7 @@ async function updatePredictions(imgData) {
   const predictions = outputTensor.data;
   const maxPrediction = Math.max(...predictions);
   console.log(maxPrediction)
-  alert(predictions.indexOf(maxPrediction))
+  document.getElementById("heading").innerHTML=predictions.indexOf(maxPrediction)
   /*for (let i = 0; i < predictions.length; i++) {
     const element = document.getElementById(`prediction-${i}`);
     element.children[0].children[0].style.height = `${predictions[i] * 100}%`;
