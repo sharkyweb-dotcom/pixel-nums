@@ -4,6 +4,7 @@ import torch.optim as optim
 import torchvision.transforms as transforms
 from torchvision.datasets import MNIST
 from torch.utils.data import DataLoader
+import matplotlib.pyplot as plt
 
 # Download and load MNIST dataset
 transform = transforms.Compose([transforms.ToTensor(), transforms.Normalize((0.5,), (0.5,))])
@@ -37,12 +38,28 @@ optimizer = optim.Adam(model.parameters(), lr=0.001)
 
 # Training the model
 num_epochs = 5
+
+z_ = 0
+
 for epoch in range(num_epochs):
     model.train()
     train_loss = 0.0
     correct_train = 0
 
     for inputs, labels in train_loader:
+        
+        if z_ == 0:
+            print("Label:", labels[0])
+            print(inputs[0])
+
+            image = inputs[0].squeeze().numpy() * 0.5 + 0.5
+            plt.imshow(image, cmap="gray")
+            plt.title(f"Label: {labels[0].item()}")
+            plt.imsave('sample_image.png', image, cmap="gray")
+            plt.show()
+
+            z = 1
+
         optimizer.zero_grad()
         outputs = model(inputs)
         loss = criterion(outputs, labels)
