@@ -5,32 +5,29 @@ import torch
 class CNN(nn.Module):
     def __init__(self):
         super(CNN, self).__init__()
-        self.conv1 = nn.Conv2d(1, 40, 5, 1)
-        self.conv2 = nn.Conv2d(40, 80, 5, 1)
-        self.fc1 = nn.Linear(4*4*80, 500)
-        self.fc2 = nn.Linear(500, 10)
+        self.conv1 = nn.Conv2d(1, 32, kernel_size=3, stride=1, padding=1)
+        self.conv2 = nn.Conv2d(32, 64, kernel_size=3, stride=1, padding=1)
+        self.fc1 = nn.Linear(64*28*28, 128)
+        self.fc2 = nn.Linear(128, 10)
 
     def forward(self, x):
-        x = F.relu(self.conv1(x))
-        x = F.max_pool2d(x, 2, 2)
-        x = F.relu(self.conv2(x))
-        x = F.max_pool2d(x, 2, 2)
-        x = x.view(-1,4*4*80)
-        x = F.relu(self.fc1(x))
+        x = torch.relu(self.conv1(x))
+        x = torch.relu(self.conv2(x))
+        x = x.view(x.size(0), -1)
+        x = torch.relu(self.fc1(x))
         x = self.fc2(x)
-
-        return F.softmax(x, dim=1)
+        return x
 
 # Load your model
 model = CNN()
-state_dict = torch.load("C:/Users/richa/test_dir/pixel-nums/models/conversion_pt_to_onnx/cnn.pt")
+state_dict = torch.load("C:/Users/richa/test_dir/pixel-nums/models/train_model/mnist_cnn_weights.pth")
 model.load_state_dict(state_dict)
 
 model.eval()
 dummy_input = torch.zeros(1,1,28,28)
 
 print("now try to export")
-torch.onnx.export(model,dummy_input,'onnx_model_inference.onnx',verbose=True, opset_version=12)
+torch.onnx.export(model,dummy_input,'pixel-nums/models/onnx_model.onnx',verbose=True, opset_version=12)
 # torch.onnx.export(model, dummy_input, "model.onnx", opset_version=11)
 print("successfully converted!!")
 #Function to Convert to ONNX 
