@@ -12,8 +12,8 @@
 # get conda
 module load anaconda/3-2021.05
 
-echo "try to create environment"
-conda env create -f env.yml
+# echo "try to create environment"
+# conda env create -f env.yml
 
 echo "try to activate environment"
 conda activate cnn-env
