@@ -15,7 +15,7 @@ for (let i=0;i<28;i++) {
     }
     matrix.push(matrix_row)
 }
-document.getElementById("guess").addEventListener('click',updatePredictions(matrix))
+// document.getElementById("guess").addEventListener('click',updatePredictions(matrix))
 function viewMatrix() {
     listAsString=''
     listOfSelected.forEach((val)=>{
