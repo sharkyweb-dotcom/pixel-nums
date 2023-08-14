@@ -5,9 +5,17 @@ let paragraph
 let colorBox=document.getElementById('col')
 let valueList=[];
 let noColorList=[]
+let matrix=[]
 for (let i=0;i<3136;i++) {valueList.push(0)}
 for (let i=0;i<784;i++) {noColorList.push(0)}
-document.getElementById("guess").addEventListener('click',updatePredictions(noColorList))
+for (let i=0;i<28;i++) {
+    let matrix_row=[]
+    for (let i=0;i<28;i++) {
+        matrix_row.push(0)
+    }
+    matrix.push(matrix_row)
+}
+document.getElementById("guess").addEventListener('click',updatePredictions(matrix))
 function viewMatrix() {
     listAsString=''
     listOfSelected.forEach((val)=>{
@@ -49,6 +57,7 @@ function darken(tile,color) {
                     }
                 }
                 noColorList[num/4]=255;
+                matrix[tile.row-1][tile.column-1]=1
             }
     } else if (mouseDown && eraser) {
         tile.style.backgroundColor=tile.oriColor;
