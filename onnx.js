@@ -24,7 +24,7 @@
 }*/
 // ONNX
 const sess = new onnx.InferenceSession();
-const loadingModelPromise = sess.loadModel("./models/onnx_model.onnx");
+const loadingModelPromise = sess.loadModel("./models/onnx_model_alphanum.onnx");
 async function updatePredictions(imgData) {
   // Get the predictions for the canvas data.
   const input = new onnx.Tensor(imgData, 'float32',[1,1,28,28]);
