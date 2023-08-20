@@ -63,6 +63,7 @@ function darken(tile,override,color) {
                 color='black';
             }
         }
+        tile.darkened=true
         tile.style.backgroundColor=color;
         tile.style.opacity='1';
         if (tile.row<=27 && tile.column <= 27) {
@@ -94,22 +95,25 @@ function save() {
     let colorList=[]
     Object.values(document.getElementById('board').children).forEach((child)=>{
         let color=child.style.backgroundColor;
-        if (!color) {
-            color='white'
+        if (child.darkened) {
+            colorList.push(1)
+        } else {
+            colorList.push(0)
         }
-        colorList.push(color)
     })
-    let cookieToSave=colorList.join("::")
-    console.log(document.getElementById("guess").innerHTML)
+    let cookieToSave=(colorList.join(""))
+    console.log(cookieToSave)
     document.cookie=cookieToSave;
     console.log(document.cookie)
 }
 function recreate() {
     console.log(document.cookie)
-    let colorList=document.cookie.split('::')
+    let colorList=document.cookie.split('')
     let index=0
     Object.values(document.getElementById('board').children).forEach((child)=>{
-        darken(child,colorList[index])
+        if (colorList[index]===1) {
+            darken(child/*,colorList[index]*/,true)
+        }
         index++
     })
 }
