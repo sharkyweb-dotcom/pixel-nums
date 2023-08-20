@@ -108,10 +108,15 @@ function save() {
 }
 function recreate() {
     console.log(document.cookie)
-    let colorList=document.cookie.split('')
+    // let colorList=document.cookie.split('')
+    let colorList=document.cookie.split("")
     let index=0
+    console.log(colorList)
     Object.values(document.getElementById('board').children).forEach((child)=>{
-        if (colorList[index]===1) {
+        console.log("we're in the tile")
+        console.log(colorList[index])
+        if (colorList[index]=="1") {
+            console.log("aboutToDarken")
             darken(child/*,colorList[index]*/,true)
         }
         index++
