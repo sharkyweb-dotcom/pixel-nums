@@ -101,7 +101,7 @@ function save() {
     })
     let cookieToSave=colorList.join("::")
     console.log(document.getElementById("guess").innerHTML)
-    document.cookie=document.getElementById("guess").innerHTML;
+    document.cookie=cookieToSave;
     console.log(document.cookie)
 }
 function recreate() {
