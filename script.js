@@ -16,6 +16,24 @@ for (let i=0;i<28;i++) {
     matrix.push(matrix_row)
 }
 // document.getElementById("guess").addEventListener('click',updatePredictions(matrix))
+function isListinMatrix(listthing,matrixthing) {
+    let lastly=false
+    matrixthing.forEach(listItem=>{
+        let i=0
+        let isIt=true
+        listItem.forEach((listItemItem)=>{
+            if (listthing[i]!=listItemItem) {
+                isIt=false
+            } 
+            i+=1
+        })
+        if (isIt) {
+            lastly=true
+            return true
+        } 
+    })
+    return lastly
+}
 function viewMatrix() {
     listAsString=''
     listOfSelected.forEach((val)=>{
@@ -36,8 +54,9 @@ let listOfSelected=[];
 function eraseChange() {
     eraser=!eraser;
 }
-function darken(tile,color) {
-    if (mouseDown && !eraser) { 
+function darken(tile,override,color) {
+    console.log("Darkening")
+    if ((mouseDown && !eraser) || override) { 
         if (color==undefined) {
             color=colorBox.value;
             if (color=='') {
@@ -46,23 +65,29 @@ function darken(tile,color) {
         }
         tile.style.backgroundColor=color;
         tile.style.opacity='1';
-            if (tile.row<=27 && tile.column <= 27) {
+        if (tile.row<=27 && tile.column <= 27) {
+            if (!isListinMatrix([tile.row,tile.column],listOfSelected)) {
                 listOfSelected.push([tile.row,tile.column]);
-                num=parseInt(tile.id.split("tile")[1])*4
-                for (let i=num;i<4+num;i++) {
-                    if (i == num+3) {
-                        valueList[i]=255
-                    } else {
-                        valueList[i]=33
-                    }
-                }
-                noColorList[num/4]=255;
-                matrix[tile.row-1][tile.column-1]=1
+
             }
+            num=parseInt(tile.id.split("tile")[1])*4
+            for (let i=num;i<4+num;i++) {
+                if (i == num+3) {
+                    valueList[i]=255
+                } else {
+                    valueList[i]=33
+                }
+            }
+            noColorList[num/4]=255;
+            matrix[tile.row-1][tile.column-1]=1
+        }
+        tile.classList.add("selected")
     } else if (mouseDown && eraser) {
         tile.style.backgroundColor=tile.oriColor;
         tile.style.opacity='0.1';
         listOfSelected.splice(listOfSelected.indexOf([tile.row,tile.column]),1);
+        matrix[tile.row-1][tile.column-1]=-1
+        tile.classList.remove("selected")
     }
 }
 function save() {
@@ -86,6 +111,25 @@ function recreate() {
     Object.values(document.getElementById('board').children).forEach((child)=>{
         darken(child,colorList[index])
         index++
+    })
+}
+function augment() {
+    let selectedArray=Object.values(document.getElementsByClassName("selected"))
+    let olos=[]
+    listOfSelected.forEach(losi=>{
+        olos.push(losi)
+    })
+    olos.forEach((coords)=>{
+        let trueTile=selectedArray[listOfSelected.indexOf(coords)];
+        for (let i = coords[0]-1;i <= coords[0]+1;i++) {
+            for (let j=coords[1]-1;j<=coords[1]+1;j++) {
+                if (Math.abs(i-trueTile.row)<=1 && Math.abs(j-trueTile.column)<=1){
+                let=transientTile=document.querySelector(`.column${j}.row${i}`)
+                if (transientTile) {
+                    if (!isListinMatrix([transientTile.row,transientTile.column],listOfSelected)) {darken(transientTile,true)}
+                }}
+            }
+        }
     })
 }
 createBoard(
