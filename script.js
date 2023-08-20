@@ -100,8 +100,8 @@ function save() {
         colorList.push(color)
     })
     let cookieToSave=colorList.join("::")
-    console.log(cookieToSave)
-    document.cookie=cookieToSave;
+    console.log(document.getElementById("guess").innerHTML)
+    document.cookie=document.getElementById("guess").innerHTML;
     console.log(document.cookie)
 }
 function recreate() {
