@@ -24,6 +24,7 @@ state_dict = torch.load("C:/Users/richa/test_dir/pixel-nums/models/train_model/m
 model.load_state_dict(state_dict)
 
 model.eval()
+# dummy_input = torch.zeros(1, 28,28)
 dummy_input = torch.zeros(1,1,28,28)
 
 print("now try to export")

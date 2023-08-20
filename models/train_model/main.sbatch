@@ -19,7 +19,7 @@ echo "try to activate environment"
 conda activate cnn-env
 # conda activate dpo2
 
-python main.py
+python main_alphanum.py
 
 
 
