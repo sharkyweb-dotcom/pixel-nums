@@ -11,7 +11,7 @@
     <title>Pixel Digits</title>
 </head>
 <body>
-    <h2>Write one digit (0-9) in the grid below, and the digit shall be detected. Or draw to your heart's content!</h1>
+    <h2>Write one digit or letter in the grid below, and it shall be detected. Or draw to your heart's content!</h1>
     <button onclick="eraseChange()">Eraser?</button>
     <button onclick="viewMatrix()">View</button>
     <button onclick="processMatrix()">CSV</button>
@@ -20,7 +20,7 @@
     <button onclick="augment()">Augment</button>
     <button onclick="document.cookie='a'">Simple_Save</button>
     <button id="guess" onclick="updatePredictions(noColorList)">Guess!</button>
-    <h1 id="heading"></h1>
+    <h1>The number/letter you have guessed is: <span id="heading"></span></h1>
     <br>
     <textarea id="col" placeholder="Enter Color Here!"></textarea>
     <script src="https://cdn.jsdelivr.net/npm/onnxjs/dist/onnx.min.js"></script>

@@ -59,7 +59,11 @@ function createBoard(width,height,squareDimensions,colors,border,eventHandlers,t
         });
         eventHandlers.forEach(evPair => {
             tile.addEventListener(evPair[0],()=>{
-                evPair[1](tile)
+                if (evPair[2]==null) {
+                    evPair[1](tile)
+                } else {
+                    evPair[1](tile,evPair[2])
+                }
                 //log("!!!")
             })
         });

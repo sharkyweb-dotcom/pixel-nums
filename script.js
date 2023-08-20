@@ -144,7 +144,7 @@ function augment() {
 createBoard(
     28,28,13,
     ["","white","dimgrey" ],[/*border "black",5,"dashed"*/],
-    [['mouseover',darken],['click',darken]],
+    [['mouseover',darken],['mousedown',darken,"true"]],
     [],[]
 )
 paragraph = document.createElement('p');
