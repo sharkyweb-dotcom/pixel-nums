@@ -96,7 +96,7 @@ function save() {
     Object.values(document.getElementById('board').children).forEach((child)=>{
         let color=child.style.backgroundColor;
         if (child.darkened) {
-            colorList.push(`${child.style.backgroundColor},`)
+            colorList.push(1)
         } else {
             colorList.push(0)
         }
@@ -109,7 +109,7 @@ function save() {
 function recreate() {
     console.log(document.cookie)
     // let colorList=document.cookie.split('')
-    let colorList=document.cookie.split(",")
+    let colorList=document.cookie.split("")
     let index=0
     console.log(colorList)
     Object.values(document.getElementById('board').children).forEach((child)=>{
@@ -117,7 +117,7 @@ function recreate() {
         console.log(colorList[index])
         if (colorList[index]=="1") {
             console.log("aboutToDarken")
-            darken(child,colorList[index],true)
+            darken(child/*,colorList[index]*/,true)
         }
         index++
     })
